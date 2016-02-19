@@ -96,6 +96,12 @@ printf("Read from SPI: %02X  %02X  %02X  %02X  %02X  %02X\n", rbuf[0], rbuf[1], 
 	}
 	
 //	getchar();
+	//! Shutdown the GPIOs after unsuccessful finish
+	{
+		bcm2835_gpio_clr_multi(1 << RPI_V2_GPIO_P1_12);
+		bcm2835_spi_end();
+		bcm2835_close();
+	}
 	return 0;
 }
 
